@@ -1,0 +1,541 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Keania+One&display=swap");
+
+/* =========================
+   GLOBAL
+   ========================= */
+
+:root {
+  --text-dark: #121212;
+  --yellow: #e9a319;
+}
+
+* {
+  font-family: "Alumni Sans", sans-serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 20px;
+  color: var(--text-dark);
+}
+body {
+  padding-top: 80px;
+}
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+#title-text {
+  font-family: "Keania One", sans-serif;
+  font-size: 55px;
+  font-weight: bold;
+  color: white;
+  padding-left: 17px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: var(--yellow);
+  z-index: 10;
+}
+#header-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+#pen-icon {
+  width: 65px;
+  height: 65px;
+  color: white;
+}
+
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  width: 280px;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+#sidebar-btn-container {
+  display: grid;
+  width: 100%;
+  height: 95px;
+  align-items: center;
+}
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f8f8;
+  border: none;
+  font-size: 1rem;
+}
+
+.sidebar-btn:hover {
+  opacity: 0.9;
+}
+
+.sidebar-btn:hover,
+.sidebar-btn.selected {
+  background-color: #333;
+  color: white;
+}
+
+/* Invertera sidebar-ikoner vid hover och selected */
+.sidebar-btn:hover .sidebar-icon,
+.sidebar-btn.selected .sidebar-icon {
+  filter: invert(100%);
+}
+
+.sidebar-icon {
+  padding-left: 30px;
+  padding-right: 18px;
+  width: 24px;
+  height: 24px;
+}
+
+/* List Buttons */
+.list-btn {
+  font-size: 1rem;
+  padding: 10px;
+  padding-left: 33px;
+}
+.list-btn:hover {
+  background-color: #333;
+  color: white;
+}
+
+.list-btn-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+}
+#todo-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#todo-list-title {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: var(--text-dark);
+  padding-top: 10px;
+  padding-bottom: 14px;
+  text-decoration: underline;
+}
+#add-btn {
+  width: 55px;
+  height: 55px;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 460px;
+  left: 50%;
+  transform: translate(-50%);
+}
+#plus-icon {
+  width: 100%;
+  height: 100%;
+}
+#add-btn:hover #plus-icon {
+  transform: scale(1.1);
+  transition: transform 0.1s ease-in-out;
+}
+
+/* Main Content */
+#main {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  min-width: calc(100% - 280px);
+  margin-left: 280px;
+  box-sizing: border-box;
+  padding: 30px;
+}
+#task-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  list-style: none;
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: none;
+}
+
+/* =========================
+   COMPONENTS
+   ========================= */
+
+/* Task Items */
+.task-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  margin-bottom: 10px;
+  background-color: #f2f2f2;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border-left: 3px solid transparent;
+}
+
+.task-item-container.completed .task-text,
+.task-item-container.completed .task-date {
+  color: lightgrey;
+  text-decoration: line-through;
+}
+
+.priority-low {
+  border-left-color: #4caf50;
+}
+.priority-medium {
+  border-left-color: #ffc107;
+}
+.priority-high {
+  border-left-color: #f44336;
+}
+.task-item-left,
+.task-item-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.task-date {
+  font-size: 16px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Buttons & Checkbox */
+.checkbox {
+  width: 14px;
+  height: 14px;
+  appearance: none;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 1px;
+  position: relative;
+}
+.checkbox:checked {
+  background-color: lightgrey;
+}
+.checkbox:checked::after {
+  content: "✓";
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  line-height: 1;
+}
+
+.details-btn {
+  background: transparent;
+  border: 1px solid #00b289;
+  border-radius: 2px;
+  color: #00b289;
+  width: 70px;
+  height: 26px;
+  font-size: 0.85rem;
+}
+.details-btn:hover {
+  background-color: #00b289;
+  color: white;
+}
+.edit-btn,
+.delete-btn {
+  background: transparent;
+  border: none;
+}
+.edit-btn img,
+.delete-btn img {
+  width: 18px;
+  height: 18px;
+}
+.edit-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(33%) sepia(97%) saturate(1064%)
+    hue-rotate(196deg) brightness(92%) contrast(93%);
+}
+.delete-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(96%) saturate(7457%)
+    hue-rotate(357deg) brightness(92%) contrast(97%);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+.modal.active {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  width: 700px;
+  overflow: hidden;
+}
+.modal-header {
+  display: flex;
+  color: white;
+  height: 48px;
+}
+.tab-btn {
+  width: 50%;
+  font-size: 1rem;
+  background-color: white;
+  border: none;
+  color: #1c1c1c;
+}
+
+.tab-btn:hover {
+  opacity: 0.9;
+}
+
+.tab-btn:hover,
+.tab-btn.selected {
+  background-color: #1c1c1c;
+  color: white;
+}
+.modal-body {
+  padding: 30px;
+  min-height: 290px;
+}
+
+/* Forms */
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+.form-container.hidden {
+  display: none;
+}
+#task-title,
+#list-title {
+  font-size: 1.2rem;
+  padding: 8px 0;
+  border: none;
+  width: 100%;
+}
+#task-title:focus,
+#list-title:focus,
+#task-details:focus,
+#due-date:focus {
+  outline: none;
+  box-shadow: none;
+}
+#task-details {
+  font-size: 1rem;
+  padding: 8px 0;
+  border: none;
+  width: 100%;
+  resize: none;
+  height: 150px;
+}
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priority-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#create-list-form-row {
+  padding-top: 211.5px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+#date-form-row {
+  gap: 10px;
+  padding-bottom: 14px;
+}
+.date-input-container {
+  display: flex;
+  padding: 5px;
+}
+#due-date {
+  border: none;
+  font-size: 0.9rem;
+}
+#calendar-btn {
+  background: transparent;
+  border: none;
+}
+#calendar-btn img {
+  width: 20px;
+  height: 20px;
+}
+#priority-btn-container {
+  display: flex;
+  gap: 10px;
+}
+.modal-btn {
+  padding: 5px 16px;
+  border: 1px solid;
+  background: transparent;
+  font-size: 0.85rem;
+}
+.priority-btn.low {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+.priority-btn.low:hover {
+  background-color: #4caf50;
+  color: white;
+}
+.priority-btn.medium {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+.priority-btn.medium:hover {
+  background-color: #ffc107;
+  color: white;
+}
+.priority-btn.high {
+  border-color: #f44336;
+  color: #f44336;
+}
+.priority-btn.high:hover {
+  background-color: #f44336;
+  color: white;
+}
+.priority-btn.selected.low {
+  background-color: #4caf50;
+  color: white;
+}
+.priority-btn.selected.medium {
+  background-color: #ffc107;
+  color: white;
+}
+.priority-btn.selected.high {
+  background-color: #f44336;
+  color: white;
+}
+.priority-btn:hover {
+  opacity: 0.8;
+}
+.cancel-btn {
+  border-color: #f44336;
+  color: #f44336;
+}
+.cancel-btn:hover {
+  background-color: #f44336;
+  color: white;
+}
+#form-action-container {
+  display: flex;
+  margin-left: auto;
+  gap: 10px;
+}
+
+#add-task-submit-btn,
+#create-list-submit-btn {
+  background-color: transparent;
+  color: #4caf50;
+  border-color: #4caf50;
+}
+#add-task-submit-btn:hover,
+#create-list-submit-btn:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Templates */
+template {
+  display: none;
+}
+
+.list-item-container {
+  display: flex;
+  align-items: center;
+  /* ta bort padding */
+  padding: 0;
+  /* mitt förslag: samma höjd som innan (t.ex. 45px) */
+  height: 45px;
+}
+
+/* Bakgrund på hela raden vid hover */
+.list-item-container:hover {
+  background-color: #333;
+  opacity: 0.9;
+}
+
+/* Visa delete-knappen när du hovrar över list-item-container */
+.list-item-container:hover .delete-list-btn {
+  display: inline-block;
+}
+
+.list-item-container:hover img {
+  filter: invert(100%) brightness(200%);
+}
+
+/* Styling på själva knappen så att den fyller ut utan egen bakgrund */
+.sidebar-btn.list-btn {
+  background: none;
+}
+
+/* Papperskorgsknapp */
+.delete-list-btn {
+  display: none;
+  background: none;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+  margin-right: 11px;
+}
+
+/* Selected state – behåll mörk bakgrund och vit text/ikon */
+.list-item-container.selected {
+  background-color: #333;
+}
+
+.list-item-container.selected .list-title {
+  color: #fff;
+}
+
+.list-item-container.selected .sidebar-icon {
+  /* invert + brightness så ikonen blir vit */
+  filter: invert(100%) brightness(200%);
+}
+
+/* Om du vill att delete-ikonen ska synas även när det är selected */
+.list-item-container.selected .delete-list-btn {
+  display: none;
+}
+
+.list-item-container.selected:hover .delete-list-btn {
+  display: inline-block;
+}

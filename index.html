@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todo-app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- =========================
+         HEADER
+         ========================= -->
+    <header>
+      <div id="header-container">
+        <h1 id="title-text">TO-DO</h1>
+        <img id="pen-icon" src="/icons/pen-icon.svg" alt="Pen icon" />
+      </div>
+    </header>
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
+    <nav id="sidebar">
+      <!-- Quick View Buttons -->
+      <div id="sidebar-btn-container">
+        <button class="sidebar-btn" id="today-btn">
+          <img
+            class="icon sidebar-icon"
+            src="/icons/calendar-today-icon.svg"
+            alt="Calendar icon"
+          />
+          <span>TODAY</span>
+        </button>
+
+        <button class="sidebar-btn" id="tasks-btn">
+          <img
+            class="icon sidebar-icon"
+            src="/icons/checkbox-icon.svg"
+            alt="Checkbox icon"
+          />
+          <span>TASKS</span>
+        </button>
+      </div>
+
+      <!-- To-Do Lists Section -->
+      <div id="todo-list-container">
+        <h2 id="todo-list-title">TO-DO LISTS</h2>
+
+        <ul class="list-btn-container">
+          <!-- Dynamic list buttons inserted here -->
+        </ul>
+
+        <!-- Add List Button -->
+        <button id="add-btn">
+          <img id="plus-icon" src="/icons/plus-icon.svg" alt="Plus icon" />
+        </button>
+      </div>
+    </nav>
+
+    <!-- =========================
+         MAIN
+         ========================= -->
+
+    <main id="main">
+      <ul id="task-list-container">
+        <!-- Task items will be rendered here -->
+      </ul>
+    </main>
+
+    <!-- =========================
+         TEMPLATES
+         ========================= -->
+
+    <!-- Task Item Template -->
+    <template id="taskItemTemplate">
+      <li class="task-item-container">
+        <div class="task-item-left">
+          <input type="checkbox" class="checkbox" />
+          <p class="task-text"></p>
+        </div>
+
+        <div class="task-item-right">
+          <button class="details-btn">Details</button>
+          <p class="task-date"></p>
+          <button type="button" class="delete-btn">
+            <img src="/icons/trash-icon.svg" alt="Delete icon" />
+          </button>
+        </div>
+      </li>
+    </template>
+
+    <template id="listItemTemplate">
+      <li class="list-item-container" data-list-id="">
+        <button class="sidebar-btn list-btn">
+          <span class="list-title"></span>
+        </button>
+        <button type="button" class="delete-list-btn" title="Radera lista">
+          <img
+            class="icon delete-icon"
+            src="/icons/trash-icon.svg"
+            alt="Delete list icon"
+          />
+        </button>
+      </li>
+    </template>
+
+    <!-- =========================
+         MODAL
+         ========================= -->
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <!-- Modal Header: Tabs -->
+        <div class="modal-header">
+          <button class="tab-btn" id="add-task-btn">ADD TASK</button>
+          <button class="tab-btn" id="create-list-btn">CREATE LIST</button>
+        </div>
+
+        <!-- Modal Body: Forms -->
+        <div class="modal-body">
+          <!-- Add Task Form -->
+          <div id="add-task-form" class="form-container">
+            <input type="text" id="task-title" placeholder="Write a task..." />
+            <textarea id="task-details" placeholder="Details..."></textarea>
+
+            <div class="form-row" id="date-form-row">
+              <label for="due-date">DUE DATE:</label>
+              <div class="date-input-container">
+                <input type="date" id="due-date" placeholder="dd / mm / yyyy" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="priority-container">
+                <label id="priority-label">PRIORITY:</label>
+                <div id="priority-btn-container">
+                  <button
+                    class="modal-btn priority-btn low"
+                    data-priority="low"
+                  >
+                    LOW
+                  </button>
+                  <button
+                    class="modal-btn priority-btn medium"
+                    data-priority="medium"
+                  >
+                    MEDIUM
+                  </button>
+                  <button
+                    class="modal-btn priority-btn high"
+                    data-priority="high"
+                  >
+                    HIGH
+                  </button>
+                </div>
+              </div>
+
+              <div id="form-action-container">
+                <button type="button" class="modal-btn cancel-btn">
+                  CANCEL
+                </button>
+                <button id="add-task-submit-btn" class="modal-btn submit-btn">
+                  ADD TASK
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Create List Form -->
+          <div id="create-list-form" class="form-container hidden">
+            <input type="text" id="list-title" placeholder="Name the list..." />
+
+            <div class="form-row" id="create-list-form-row">
+              <button type="button" class="modal-btn cancel-btn">CANCEL</button>
+              <button id="create-list-submit-btn" class="modal-btn">
+                CREATE LIST
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
