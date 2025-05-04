@@ -504,6 +504,7 @@ const TodoApp = (function () {
       );
       DOM.formElements.taskTitle.value = "";
       DOM.formElements.taskDetails.value = "";
+      DOM.formElements.taskDetails.placeholder = "Details...";
       DOM.formElements.dueDate.value = "";
       DOM.formElements.listTitle.value = "";
     },
@@ -531,6 +532,7 @@ const TodoApp = (function () {
       state.currentModalMode = "details";
       DOM.formElements.taskTitle.value = task.title;
       DOM.formElements.taskDetails.value = task.details || "";
+      DOM.formElements.taskDetails.placeholder = "";
       DOM.formElements.dueDate.value = task.date || "";
       DOM.formElements.taskTitle.readOnly = true;
       DOM.formElements.taskDetails.readOnly = true;
@@ -559,6 +561,7 @@ const TodoApp = (function () {
       state.currentModalMode = "edit";
       DOM.formElements.taskTitle.value = task.title;
       DOM.formElements.taskDetails.value = task.details || "";
+      DOM.formElements.taskDetails.placeholder = "Details...";
       DOM.formElements.dueDate.value = task.date || "";
       DOM.formElements.taskTitle.readOnly = false;
       DOM.formElements.taskDetails.readOnly = false;
